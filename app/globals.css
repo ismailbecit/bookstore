@@ -2,3 +2,19 @@
   background-color: #084793 !important;
   color: white;
 }
+
+a {
+  text-decoration: none !important;
+}
+
+.mt-25 {
+  margin-top: 25px !important;
+}
+
+.mt-50 {
+  margin-top: 50px !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

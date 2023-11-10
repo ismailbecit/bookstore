@@ -14,10 +14,13 @@
   cursor: pointer;
 }
 
-.autchCardtitle {
-  display: block;
+.authCardtitle {
+  min-width: 70px;
+  display: flex;
+  flex-direction: column;
   color: #484848;
   font-size: 15px;
   font-weight: 700;
   line-height: 1;
+  gap: 2px;
 }

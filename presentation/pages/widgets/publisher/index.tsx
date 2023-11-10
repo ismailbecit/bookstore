@@ -12,11 +12,10 @@ export default function Publisher() {
         <Swiper
           slidesPerView={10}
           autoplay={{ delay: 2500 }}
-          lazy={true}
           // className={"p-5"}
           modules={[Autoplay]}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
         >
           {Array.from({ length: 20 }).map(() => (
             <SwiperSlide >
