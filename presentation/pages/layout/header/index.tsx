@@ -1,5 +1,7 @@
 import React from 'react'
 import headerClass from "./index.module.scss"
+import { BiChevronDown } from "react-icons/bi"
+import { AiOutlineUser } from "react-icons/ai"
 const Header = () => {
   return (
     <>
@@ -13,8 +15,16 @@ const Header = () => {
             <input placeholder='Kitap ara....' className='flex-grow-2 form-control w-100' type='search' /> {/* input için flex-grow-2 sınıfı */}
           </div>
 
-          <div className='d-flex'>
-            <div>Giriş Yap <br /> <small>üye ol</small></div>
+          <div className={`d-flex ${headerClass.authCard}`}>
+            <div>
+              <AiOutlineUser />
+            </div>
+            <div className={`${headerClass.autchCardtitle}`}>
+              Giriş Yap <br />
+              <small>üye ol</small></div>
+            <div>
+              <BiChevronDown />
+            </div>
           </div>
         </div>
         <div className={`bg-color-main w-100 p-3 d-flex justify-content-center gap-5 ${headerClass.subMenu}`} >

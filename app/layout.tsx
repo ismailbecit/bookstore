@@ -4,6 +4,7 @@ import './globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'swiper/css';
 import Header from '@/presentation/pages/layout/header';
+import Footer from '@/presentation/pages/layout/footer';
 const inter = Inter({ subsets: ['greek-ext'] })
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={""}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )
