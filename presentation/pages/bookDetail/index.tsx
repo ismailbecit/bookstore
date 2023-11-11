@@ -13,8 +13,10 @@ type IBookDetail = {
 }
 export const BookDetail = ({ book }: IBookDetail) => {
   const authSlice = useAppSelector((state) => state.auth)
+  const orderSlice = useAppSelector((state) => state.order)
+  console.log(orderSlice)
   const [addOrderClick, setAddOrderClick] = useState(false)
-  const selectedProduct = { id: "21", name: "deneme" }
+  const selectedProduct = { id: book.id, title: book.volumeInfo?.title, qty: 1, price: book.saleInfo.listPrice?.amount ?? 0, img: book.volumeInfo.imageLinks.thumbnail }
   const dispatch = useAppDispatch()
   const price = book.saleInfo.hasOwnProperty("listPrice") ? `${book.saleInfo?.listPrice?.amount} TL` : "Ücretsiz"
   const addOrderHandler = () => {

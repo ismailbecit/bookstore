@@ -7,3 +7,11 @@ export const formikValidate = (formik: Object, key: string) => {
 }
 
 export const wordRegex = /^[A-Za-zÇçĞğİıÖöŞşÜü]+$/;
+
+
+export const orderTotalControl = (products) => {
+  return products?.reduce((acc, currentValue) => {
+    acc += currentValue.price * currentValue.qty
+    return acc
+  }, 0)
+}

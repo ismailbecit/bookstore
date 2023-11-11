@@ -1,49 +1,56 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import basketClass from "./index.module.scss"
 import { AiFillDelete } from 'react-icons/ai'
+import { useAppDispatch, useAppSelector } from '@/redux/store'
+import { orderDecrease, orderIncrease, removeBasketItem, resetOrderSlice } from '@/redux/slices/order'
 const Basket = () => {
+  const dispatch = useAppDispatch()
+  const orderSlice = useAppSelector((state) => state.order)
   return (
     <div className='container'>
       <div className='row'>
         <div className="col-md-8">
-          <h1 className='h4'>Sepetim (1 Ürün)</h1>
+          <h1 className='h4'>Sepetim ({orderSlice.order.count} Ürün)</h1>
           <div className={`d-flex flex-column justify-content-center align-items-center ${basketClass.table} mt-4`}>
-            {Array.from({ length: 30 }).map(() => (
+            {orderSlice.order?.products?.map((item) => (
               <div className={`d-flex gap-5 ${basketClass.tableContainer}`}>
                 <div className={`${basketClass.tableItem} d-flex align-items-center gap-3`} style={{ width: 350 }}>
-                  <div><img src='https://i.dr.com.tr/cache/82x82-0/originals/0002006539001-1.jpg' /></div>
-                  <div>İsmaiasdasl Kitabı sdasds asasas  sa asasd.....</div>
+                  <div><img src={item.img} height={80} /></div>
+                  <div>{item.title}</div>
+                </div>
+                <div style={{ width: 80 }}>
+                  <div>{item.price} TL</div>
                 </div>
                 <div style={{ width: 120 }}>
-                  <div>2100.99 TL</div>
-                </div>
-                <div style={{ width: 180 }}>
-                  <div className="d-flex">
-                    <button>-</button>
-                    <div>1</div>
-                    <button>+</button>
+                  <div className={`d-flex ${basketClass.orderCount}`}>
+                    <span onClick={() => dispatch(orderDecrease(item.id))}>-</span>
+                    <span className={`${basketClass.line}`}></span>
+                    <label>{item.qty}</label>
+                    <span className={`${basketClass.line}`}></span>
+                    <span onClick={() => dispatch(orderIncrease(item.id))}>+</span>
                   </div>
-                  <small className='text-sm d-flex align-items-center cursor-pointer' >
-                    <AiFillDelete size={20} color={"gray"} />   <small>  Ürünü Kaldır</small>
-                  </small>
                 </div>
+                <small className='text-sm d-flex align-items-center cursor-pointer' style={{ width: 90 }} onClick={() => dispatch(removeBasketItem(item.id))}>
+                  <AiFillDelete size={20} color={"gray"} />   <small>  Ürünü Kaldır</small>
+                </small>
               </div>
             ))}
-            <div className='d-flex justify-content-end w-100 cursor-pointer'>Tümünü Sil</div>
+            <div className='d-flex justify-content-end w-100 cursor-pointer' onClick={() => dispatch(resetOrderSlice())}>Tümünü Sil</div>
           </div>
         </div>
         <div className="col-md-4 mt-5">
           <div className='card p-4 gap-3'>
             <h2 className='h5'>Sipariş Özeti</h2>
             <div className={basketClass.cardItem}>
-              <div>Sepet Toplamı: </div> <b>12.99 TL</b>
+              <div>Sepet Toplamı: </div> <b>{orderSlice.order.total?.toFixed(2)} TL</b>
             </div>
             <div className={basketClass.cardItem}>
-              <div>Ürünü Adedi: </div> <b>132 Adet</b>
+              <div>Ürünü Adedi: </div> <b>{orderSlice.order.count} Adet</b>
             </div>
             <hr />
             <div className={basketClass.cardItem}>
-              <div>Ödenecek Tutarı: </div> <b>12.99 TL</b>
+              <div>Ödenecek Tutarı: </div> <b>{orderSlice.order.total?.toFixed(2)} TL</b>
             </div>
             <button className='btn bg-color-main text-white'>Alışverişi Tamamla</button>
           </div>
@@ -52,5 +59,4 @@ const Basket = () => {
     </div >
   )
 }
-
 export default Basket

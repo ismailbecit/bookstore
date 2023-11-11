@@ -16,3 +16,24 @@
   display: flex;
   justify-content: space-between;
 }
+
+.orderCount {
+  border: 1px solid gray;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+
+  span {
+    cursor: pointer;
+    font-size: 20px;
+  }
+}
+
+.line {
+  border-right: 1px solid #444444;
+  height: 20px;
+  margin: 0 10px;
+}

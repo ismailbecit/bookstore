@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import headerClass from "./index.module.scss"
 import { BiBasket, BiChevronDown } from "react-icons/bi"
 import { AiOutlineUser } from "react-icons/ai"
@@ -10,15 +10,19 @@ import { register, setAuthInitial, setAuthToggle } from '@/redux/slices/auth'
 import { Badge } from 'react-bootstrap'
 import { setOrderInitial } from '@/redux/slices/order'
 import { useRouter } from 'next/navigation'
+import { getCategories } from '@/redux/service/csr/categoryAPI'
 const Header = () => {
   const dispatch = useAppDispatch()
   const authSlice = useAppSelector((state) => state.auth)
   const orderCount = useAppSelector((state) => state.order.order.count)
+  const [categories, setCategories] = useState()
   const router = useRouter()
   useEffect(() => {
     dispatch(setAuthInitial())
     dispatch(setOrderInitial())
+    getCategories().then((res) => setCategories(res))
   }, [])
+  console.log(categories)
   return (
     <>
       <nav>
@@ -67,11 +71,9 @@ const Header = () => {
           </div>
         </div>
         <div className={`bg-color-main w-100 p-3 d-flex justify-content-center gap-5 ${headerClass.subMenu}`} >
-          <div>Kitap</div>
-          <div>Ders Kitapları</div>
-          <div>Dergi</div>
-          <div>Bilgisayar</div>
-          <div>Biliim Kurgu</div>
+          {categories?.map((item) => (
+            <div>{item.name}</div>
+          ))}
         </div>
       </nav >
       {authSlice.authToggle && <AuthModal />} *
