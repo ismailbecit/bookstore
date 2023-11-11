@@ -28,6 +28,7 @@ export interface VolumeInfo {
   previewLink: string
   infoLink: string
   canonicalVolumeLink: string
+  description?: string
 }
 
 export interface IndustryIdentifier {

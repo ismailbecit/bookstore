@@ -5,11 +5,18 @@ import { Button } from 'react-bootstrap'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { addOrder } from '@/redux/slices/order'
 import { resetAuthStatus, setAuthToggle } from '@/redux/slices/auth'
-export const BookDetail = () => {
+import { IBook } from '@/redux/models/book'
+import parse from 'html-react-parser';
+import moment from 'moment'
+type IBookDetail = {
+  book: IBook
+}
+export const BookDetail = ({ book }: IBookDetail) => {
   const authSlice = useAppSelector((state) => state.auth)
   const [addOrderClick, setAddOrderClick] = useState(false)
   const selectedProduct = { id: "21", name: "deneme" }
   const dispatch = useAppDispatch()
+  const price = book.saleInfo.hasOwnProperty("listPrice") ? `${book.saleInfo?.listPrice?.amount} TL` : "Ücretsiz"
   const addOrderHandler = () => {
     if (authSlice.user.isAuth) {
       dispatch(addOrder(selectedProduct))
@@ -26,37 +33,28 @@ export const BookDetail = () => {
     }
   }, [authSlice.status])
   return (
-    <div className='container'>
+    <div className='container mb-5'>
       <div className='row'>
         <div className='col-md-7'>
-          <img src='https://productimages.hepsiburada.net/s/35/222-222/10459012661298.jpg/format:webp' width={600} />
+          <img className={detailClass.image} src={book.volumeInfo?.imageLinks?.medium} loading='eager' />
         </div>
 
         <div className='col-md-5 mt-50'>
           <div className={detailClass.title}>
-            <h1>History Swich BOoksas sd aaas asasasaasasas da asd</h1>
-            <h3>History Swich BOoks</h3>
-            <h4 className={detailClass.price}>259.99 TL</h4>
+            <h1>{book.volumeInfo?.title}</h1>
+            <h3>{book.volumeInfo?.authors[0]}</h3>
+            <h4 className={detailClass.price}>{price}</h4>
             <div className={detailClass.featuredInformation}>
               <div className='mt-50 m-5 mb-0 text-center' style={{ fontSize: 22, fontWeight: 400 }}>Öne Çıkan Bilgiler</div>
               <hr />
               <div className='container mt-3 '>
+                <p className='mb-5'>{parse(book.volumeInfo?.description?.slice(0, 500))}</p>
                 <div className='row gap-2 d-flex justify-content-center'>
                   <div className="col-md-5">
-                    <div> Hamur Tipi: 2 Hamur </div>
-                    <div>İlk Baskı Yılı: 2023</div>
+                    <div> Sayfa Sayısı: {book.volumeInfo?.pageCount} </div>
                   </div>
                   <div className="col-md-5">
-                    <div>Dil: Türkçe</div>
-                    <div>Ebat: 13,5 x 21</div>
-                  </div>
-                  <div className="col-md-5">
-                    <div>Dil: Türkçe</div>
-                    <div>Ebat: 13,5 x 21</div>
-                  </div>
-                  <div className="col-md-5">
-                    <div>Dil: Türkçe</div>
-                    <div>Ebat: 13,5 x 21</div>
+                    <div>Tarih: {moment(book.volumeInfo?.publishedDate).format("DD.MM.YYYY")}</div>
                   </div>
                 </div>
               </div>

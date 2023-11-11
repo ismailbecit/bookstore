@@ -9,10 +9,12 @@ import AuthModal from '@/presentation/components/authModal'
 import { register, setAuthInitial, setAuthToggle } from '@/redux/slices/auth'
 import { Badge } from 'react-bootstrap'
 import { setOrderInitial } from '@/redux/slices/order'
+import { useRouter } from 'next/navigation'
 const Header = () => {
   const dispatch = useAppDispatch()
   const authSlice = useAppSelector((state) => state.auth)
   const orderCount = useAppSelector((state) => state.order.order.count)
+  const router = useRouter()
   useEffect(() => {
     dispatch(setAuthInitial())
     dispatch(setOrderInitial())
@@ -32,14 +34,13 @@ const Header = () => {
           </div>
           <div className='d-flex align-items-center gap-4'>
             {authSlice.user.isAuth && (
-              <div className='position-relative'>
+              <div className='position-relative' onClick={() => router.push("/sepetim")}>
                 <div className='position-absolute' style={{ right: -8, top: -8 }}>
                   <Badge style={{ fontSize: 10 }}>{orderCount}</Badge>
                 </div>
                 <div className='cursor-pointer'>
                   <BiBasket size={27} />
                 </div>
-
               </div>
             )}
             <div className={`d-flex ${headerClass.authCard}`} onClick={() => !authSlice.user.isAuth && dispatch(setAuthToggle(true))}>

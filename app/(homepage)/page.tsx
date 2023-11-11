@@ -20,7 +20,7 @@ export default async function Home() {
       <Testt />
       {/* <Publisher />
       <CategoryWidget /> */}
-      {widgets?.sort((a, b) => a.order - b.order).map((item: IWidget) => (
+      {widgets?.map((item: IWidget) => (
         <>
           {item.type === "BANNER" && <Banner bannerWidget={item as IBannerWidget} />}
           {item.type === "BOOK" && <BooksWidget widget={item} />}
