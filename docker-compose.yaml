@@ -1,0 +1,10 @@
+version: "3.0"
+services:
+  app:
+    container_name: bookstore-platform
+    image: bookstore-platform
+    ports:
+      - "5001:3000"
+    build:
+      context: .
+    restart: on-failure

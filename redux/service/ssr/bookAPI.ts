@@ -6,5 +6,10 @@ export const getBookDetailById = (bookId: string) => {
   })
 }
 
+export const getBookCategories = (slug: string) => {
+  return new Promise(async (resolve, reject) => {
+    axiosSSRService.get(`volumes?q=${slug}&maxResults=40`).then((res) => resolve(res.data)).catch((err) => reject(err))
+  })
+}
 
-export default { getBookDetailById }
+export default { getBookDetailById, getBookCategories }

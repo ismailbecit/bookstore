@@ -9,32 +9,41 @@ import AuthModal from '@/presentation/components/authModal'
 import { register, setAuthInitial, setAuthToggle } from '@/redux/slices/auth'
 import { Badge } from 'react-bootstrap'
 import { setOrderInitial } from '@/redux/slices/order'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { getCategories } from '@/redux/service/csr/categoryAPI'
+import { ICategory } from '@/redux/models/category'
 const Header = () => {
   const dispatch = useAppDispatch()
   const authSlice = useAppSelector((state) => state.auth)
   const orderCount = useAppSelector((state) => state.order.order.count)
-  const [categories, setCategories] = useState()
+  const [categories, setCategories] = useState<ICategory[]>()
+  const [search, setSearch] = useState("")
   const router = useRouter()
+  const a = useParams()
   useEffect(() => {
     dispatch(setAuthInitial())
     dispatch(setOrderInitial())
-    getCategories().then((res) => setCategories(res))
+    getCategories().then((res) => setCategories(res as ICategory[]))
   }, [])
-  console.log(categories)
+
   return (
-    <>
+    <main className='mb-5'>
       <nav>
-        <div className='container d-flex justify-content-between align-items-center p-2'>
+        <div className='container d-flex justify-content-between align-items-center p-2 gap-4'>
           <div className='mt-2 mb-2'>
             <Link href={"/"}>
               <img src='/assets/next.svg' height={30} />
             </Link>
           </div>
 
-          <div className='d-flex gap-4 flex-grow-4' style={{ minWidth: 800 }}>
-            <input placeholder='Kitap ara....' className='flex-grow-2 form-control w-100' type='search' /> {/* input için flex-grow-2 sınıfı */}
+          <div className='d-flex gap-4 flex-grow-4 w-100 d-none d-lg-block'>
+            <input value={search} placeholder='Kitap ara....' className='flex-grow-2 form-control w-100' type='search' onChange={(e) => setSearch(e.target.value)} onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                console.log("enter")
+                router.push(`/s/${search}`)
+                setSearch("")
+              }
+            }} />
           </div>
           <div className='d-flex align-items-center gap-4'>
             {authSlice.user.isAuth && (
@@ -47,7 +56,7 @@ const Header = () => {
                 </div>
               </div>
             )}
-            <div className={`d-flex ${headerClass.authCard}`} onClick={() => !authSlice.user.isAuth && dispatch(setAuthToggle(true))}>
+            <div className={`d-md-flex ${headerClass.authCard} ${authSlice.user?.isAuth ? "d-none" : "d-flex"}`} onClick={() => !authSlice.user.isAuth && dispatch(setAuthToggle(true))}>
               <div>
                 <AiOutlineUser size={30} />
               </div>
@@ -70,14 +79,18 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className={`bg-color-main w-100 p-3 d-flex justify-content-center gap-5 ${headerClass.subMenu}`} >
-          {categories?.map((item) => (
-            <div>{item.name}</div>
+        <div className={`bg-color-main w-100 p-3 d-flex justify-content-md-center ${headerClass.subMenu}`} style={{ overflow: "auto" }} >
+          {categories?.map((item: ICategory) => (
+            <Link href={`/b/${item.slug}`} className='text-white'>
+              <div>{item.name}</div>
+            </Link>
           ))}
         </div>
       </nav >
-      {authSlice.authToggle && <AuthModal />} *
-    </>
+      <div>
+        {authSlice.authToggle && <AuthModal />}
+      </div>
+    </main>
   )
 }
 

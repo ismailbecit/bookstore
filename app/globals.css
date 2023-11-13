@@ -18,3 +18,7 @@ a {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.subMenu {
+  overflow: scroll;
+}

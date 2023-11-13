@@ -1,39 +1,39 @@
 export const getCategories = () => {
   const categories = [
     {
-      id: "education",
+      slug: "education",
       name: "Eğitim"
     },
     {
-      id: "horror",
+      slug: "horror",
       name: "Korku"
     },
     {
-      id: "advanced",
+      slug: "advanced",
       name: "Macera"
     },
     {
-      id: "travel",
+      slug: "travel",
       name: "Gezi&Seyahat"
     },
     {
-      id: "novel",
+      slug: "novel",
       name: "Roman"
     },
     {
-      id: "sciencefiction",
+      slug: "sciencefiction",
       name: "Bilim Kurgu"
     },
     {
-      id: "fantasy",
+      slug: "fantasy",
       name: "Fantastik"
     },
     {
-      id: "history",
+      slug: "history",
       name: "Tarih"
     },
     {
-      id: "philosophy",
+      slug: "philosophy",
       name: "Felsefe"
     },
   ]

@@ -14,7 +14,6 @@ type IBookDetail = {
 export const BookDetail = ({ book }: IBookDetail) => {
   const authSlice = useAppSelector((state) => state.auth)
   const orderSlice = useAppSelector((state) => state.order)
-  console.log(orderSlice)
   const [addOrderClick, setAddOrderClick] = useState(false)
   const selectedProduct = { id: book.id, title: book.volumeInfo?.title, qty: 1, price: book.saleInfo.listPrice?.amount ?? 0, img: book.volumeInfo.imageLinks.thumbnail }
   const dispatch = useAppDispatch()
@@ -37,20 +36,19 @@ export const BookDetail = ({ book }: IBookDetail) => {
   return (
     <div className='container mb-5'>
       <div className='row'>
-        <div className='col-md-7'>
+        <div className='col-md-12 col-lg-7 d-flex justify-content-center justify-content-lg-start'>
           <img className={detailClass.image} src={book.volumeInfo?.imageLinks?.medium} loading='eager' />
         </div>
-
-        <div className='col-md-5 mt-50'>
+        <div className='col-md-12 col-lg-5 mt-50'>
           <div className={detailClass.title}>
             <h1>{book.volumeInfo?.title}</h1>
-            <h3>{book.volumeInfo?.authors[0]}</h3>
+            <h3>{book.volumeInfo?.authors?.[0]}</h3>
             <h4 className={detailClass.price}>{price}</h4>
             <div className={detailClass.featuredInformation}>
               <div className='mt-50 m-5 mb-0 text-center' style={{ fontSize: 22, fontWeight: 400 }}>Öne Çıkan Bilgiler</div>
               <hr />
               <div className='container mt-3 '>
-                <p className='mb-5'>{parse(book.volumeInfo?.description?.slice(0, 500))}</p>
+                <p className='mb-5'>{book.volumeInfo?.description && parse(book.volumeInfo?.description?.slice(0, 500))}</p>
                 <div className='row gap-2 d-flex justify-content-center'>
                   <div className="col-md-5">
                     <div> Sayfa Sayısı: {book.volumeInfo?.pageCount} </div>

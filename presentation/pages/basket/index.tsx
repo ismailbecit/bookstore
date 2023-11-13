@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React from 'react'
 import basketClass from "./index.module.scss"
 import { AiFillDelete } from 'react-icons/ai'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
@@ -39,7 +39,7 @@ const Basket = () => {
             <div className='d-flex justify-content-end w-100 cursor-pointer' onClick={() => dispatch(resetOrderSlice())}>Tümünü Sil</div>
           </div>
         </div>
-        <div className="col-md-4 mt-5">
+        <div className="col-md-12 col-lg-3 mt-5">
           <div className='card p-4 gap-3'>
             <h2 className='h5'>Sipariş Özeti</h2>
             <div className={basketClass.cardItem}>

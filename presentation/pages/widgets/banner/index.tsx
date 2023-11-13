@@ -6,7 +6,6 @@ import 'swiper/css/navigation';
 import bannerClass from "./index.module.scss"
 import 'swiper/css/pagination';
 import { IBannerWidget } from '@/redux/models/widget';
-import { useAppSelector } from '@/redux/store';
 type IBanner = {
   bannerWidget: IBannerWidget
 }
@@ -16,6 +15,7 @@ export default function Banner({ bannerWidget }: IBanner) {
       <div className='justify-content-center m-4'>
         <Swiper
           slidesPerView={1}
+          spaceBetween={20}
           pagination={{ clickable: true, clickableClass: "mt-5" }}
           navigation={{ enabled: true }}
           autoplay={{
@@ -32,6 +32,6 @@ export default function Banner({ bannerWidget }: IBanner) {
           ))}
         </Swiper>
       </div>
-    </main>
+    </main >
   )
 }
