@@ -3,7 +3,7 @@ var redis: Redis;
 export const redisClient = async () => {
   if (redis === null || !redis) {
     const ioRedis = await new Redis({
-      host: "127.0.0.1",
+      host: "localhost",
       port: 6379,
     });
     redis = ioRedis

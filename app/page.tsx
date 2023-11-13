@@ -12,7 +12,7 @@ export default async function Home() {
   const widgets = await fetchWidgets()
   return (
     <main >
-      {widgets && widgets?.map((item: IWidget) => (
+      {widgets?.length > 0 && widgets?.map((item: IWidget) => (
         <>
           {item.type === "BANNER" && <Banner bannerWidget={item} />}
           {item.type === "BOOK" && <BooksWidget widget={item} />}
