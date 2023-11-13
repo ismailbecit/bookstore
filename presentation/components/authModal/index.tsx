@@ -26,7 +26,7 @@ const AuthModal = () => {
     }
   })
   const handleClose = () => dispatch(setAuthToggle(false));
-  const wordControl = (e) => {
+  const wordControl = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!wordRegex.test(e.key)) {
       e.preventDefault()
     }

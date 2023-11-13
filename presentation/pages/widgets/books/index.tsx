@@ -6,8 +6,6 @@ import 'swiper/css/navigation';
 import bookClass from "./index.module.scss"
 import 'swiper/css/pagination';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import axios from 'axios';
 import { IBook } from '@/redux/models/book';
 import { IWidget } from '@/redux/models/widget';
 import slugify from 'react-slugify';

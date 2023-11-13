@@ -7,8 +7,8 @@ import Link from 'next/link'
 import slugify from 'react-slugify'
 type IBookList = {
   books: IBook[]
-  categoryName: string
-  isSearch: boolean
+  categoryName?: string
+  isSearch?: boolean
 }
 export const BookList = ({ books, categoryName, isSearch }: IBookList) => {
   return (

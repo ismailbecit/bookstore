@@ -44,6 +44,7 @@ export interface ReadingModes {
 export interface ImageLinks {
   smallThumbnail: string
   thumbnail: string
+  medium: string
 }
 
 export interface SaleInfo {

@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const nextBuildId = require('next-build-id')
 const nextConfig = {
   async rewrites() {
     return [
@@ -8,6 +9,9 @@ const nextConfig = {
       },
     ];
   },
+  generateBuildId: () => nextBuildId({ dir: __dirname }),
+  typescript: {
+    ignoreBuildErrors: false,
+  }
 }
-
 module.exports = nextConfig

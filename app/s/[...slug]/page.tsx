@@ -7,7 +7,7 @@ const fetchBook = async (slug: string) => {
   return await axiosCSRService.get(`/categories?slug=${slug}`).then((res) => res.data).catch((err) => err)
 }
 
-const BooksListPage = async ({ params }) => {
+const BooksListPage = async ({ params }: { params: { slug: string[] } }) => {
   const slug = params.slug?.[0]
   const [book] = await Promise.all([fetchBook(slug).then((res) => res)])
   return <BookList books={book?.items} isSearch />

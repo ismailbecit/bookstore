@@ -1,7 +1,7 @@
 import Banner from '@/presentation/pages/widgets/banner';
 import BooksWidget from '@/presentation/pages/widgets/books';
 import { axiosCSRService } from '@/libs/axios/csr/interceptor';
-import { IBannerWidget, IWidget } from '@/redux/models/widget';
+import { IWidget } from '@/redux/models/widget';
 
 
 const fetchWidgets = async () => {
@@ -11,10 +11,10 @@ const fetchWidgets = async () => {
 export default async function Home() {
   const widgets = await fetchWidgets()
   return (
-    <main className={""}>
+    <main >
       {widgets && widgets?.map((item: IWidget) => (
         <>
-          {item.type === "BANNER" && <Banner bannerWidget={item as IBannerWidget} />}
+          {item.type === "BANNER" && <Banner bannerWidget={item} />}
           {item.type === "BOOK" && <BooksWidget widget={item} />}
         </>
       ))}

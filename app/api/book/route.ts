@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams
-  const bookId = searchParams.get("id")
+  const bookId = searchParams.get("id") as string
 
   if (bookId === undefined) {
     return Response.json({ message: "Kitap ID zorunlu alandır." }, { status: 400 })
@@ -16,9 +16,8 @@ export async function GET(req: NextRequest) {
     return Response.json(JSON.parse(bookCache))
   }
   let book = null
-  await getBookDetailById(bookId).then((res) => {
+  await getBookDetailById(bookId).then((res: any) => {
     book = res.data
-
   })
   await redis.set(redisKey, JSON.stringify(book))
   return Response.json(book)

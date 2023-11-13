@@ -1,7 +1,7 @@
 import Redis from "ioredis"
-var redis: Redis = null;
+var redis: Redis;
 export const redisClient = async () => {
-  if (redis === null) {
+  if (redis === null || !redis) {
     const ioRedis = await new Redis({
       host: "127.0.0.1",
       port: 6379,

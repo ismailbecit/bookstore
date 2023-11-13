@@ -1,12 +1,13 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { orderTotalControl } from "@/utils/utils";
+import { IBasket } from "@/redux/models/basket";
 
 const initialState = {
   order: {
     count: 0,
     total: 0,
-    products: [],
+    products: [] as IBasket[],
   },
 };
 

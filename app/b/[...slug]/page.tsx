@@ -1,6 +1,7 @@
 "use client"
 import { axiosCSRService } from '@/libs/axios/csr/interceptor'
 import { BookList } from '@/presentation/pages/bookList'
+import { ICategory } from '@/redux/models/category'
 import Error from 'next/error'
 import React from 'react'
 
@@ -11,10 +12,10 @@ const fetchCategory = async () => {
   return await axiosCSRService.get(`/categories`).then((res) => res.data).catch((err) => err)
 }
 
-const BooksListPage = async ({ params }) => {
+const BooksListPage = async ({ params }: { params: { slug: string[] } }) => {
   const slug = params.slug?.[0]
   const [book, categories] = await Promise.all([fetchBookCategories(slug).then((res) => res), fetchCategory().then((res) => res),])
-  const categoy = categories.find((el) => el.slug === slug)
+  const categoy = categories.find((el: ICategory) => el.slug === slug)
   if (categoy) {
     return <BookList books={book?.items} categoryName={categoy?.name} />
   } else {

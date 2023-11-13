@@ -7,7 +7,7 @@ import bannerClass from "./index.module.scss"
 import 'swiper/css/pagination';
 import { IBannerWidget } from '@/redux/models/widget';
 type IBanner = {
-  bannerWidget: IBannerWidget
+  bannerWidget: IBannerWidget | any
 }
 export default function Banner({ bannerWidget }: IBanner) {
   return (
@@ -25,7 +25,7 @@ export default function Banner({ bannerWidget }: IBanner) {
           className={bannerClass.bannerContainer}
           modules={[Pagination, Navigation, Autoplay]}
         >
-          {bannerWidget.items?.map((banner) => (
+          {bannerWidget.items?.map((banner: { img: string }) => (
             <SwiperSlide >
               <img src={banner.img} />
             </SwiperSlide>
