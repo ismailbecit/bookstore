@@ -1,9 +1,6 @@
 "use client"
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css/navigation';
-import publisher from "./index.module.scss"
 import 'swiper/css/pagination';
 export default function CategoryWidget() {
   return (

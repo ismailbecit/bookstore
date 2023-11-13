@@ -39,7 +39,6 @@ const Header = () => {
           <div className='d-flex gap-4 flex-grow-4 w-100 d-none d-lg-block'>
             <input value={search} placeholder='Kitap ara....' className='flex-grow-2 form-control w-100' type='search' onChange={(e) => setSearch(e.target.value)} onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                console.log("enter")
                 router.push(`/s/${search}`)
                 setSearch("")
               }
