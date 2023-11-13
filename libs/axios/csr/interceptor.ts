@@ -1,6 +1,6 @@
 import axios from "axios";
 export const axiosCSRService = axios.create({
-  baseURL: "http:/213.142.151.156:5001/api/"
+  baseURL: "http://213.142.151.156:5001/api/"
 })
 axiosCSRService.interceptors.request.use(function (config) {
   return config;
